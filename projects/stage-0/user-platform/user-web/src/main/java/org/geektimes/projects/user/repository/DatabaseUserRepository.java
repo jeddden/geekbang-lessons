@@ -43,6 +43,17 @@ public class DatabaseUserRepository implements UserRepository {
 
     @Override
     public boolean save(User user) {
+        String databaseURL = "jdbc:derby:/Users/liuxilai/IdeaProjects/db/user-platform;create=true";
+        try {
+            Connection connection = DriverManager.getConnection(databaseURL);
+            Statement statement = connection.createStatement();
+            String sql = "INSERT INTO users(name,password,email,phoneNumber) VALUES";
+            sql += " ('" + user.getName() + "','" + user.getPassword() + "'," + "'xxx@1.com','123')";
+            statement.execute(sql);
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return false;
     }
 

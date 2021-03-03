@@ -121,7 +121,6 @@ public class FrontControllerServlet extends HttpServlet {
         if (controller != null) {
 
             HandlerMethodInfo handlerMethodInfo = handleMethodInfoMapping.get(requestMappingPath);
-
             try {
                 if (handlerMethodInfo != null) {
 
@@ -150,6 +149,9 @@ public class FrontControllerServlet extends HttpServlet {
                         return;
                     } else if (controller instanceof RestController) {
                         // TODO
+//                        Object invoke = handlerMethodInfo.getHandlerMethod().invoke(controller, request, response);
+//                        requestURI.startsWith("/register")
+
                     }
 
                 }
