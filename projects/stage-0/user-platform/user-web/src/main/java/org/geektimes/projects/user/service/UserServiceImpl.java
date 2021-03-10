@@ -3,11 +3,10 @@ package org.geektimes.projects.user.service;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.repository.DatabaseUserRepository;
 import org.geektimes.projects.user.repository.UserRepository;
-import org.geektimes.projects.user.sql.DBConnectionManager;
 
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository = new DatabaseUserRepository(new DBConnectionManager());
+    private UserRepository userRepository = new DatabaseUserRepository();
 
     public UserServiceImpl() {
         super();
@@ -20,7 +19,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean register(User user) {
         return userRepository.save(user);
-//        return false;
     }
 
     @Override

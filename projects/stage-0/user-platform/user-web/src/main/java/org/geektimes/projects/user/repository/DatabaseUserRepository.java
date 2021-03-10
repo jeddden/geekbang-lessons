@@ -1,6 +1,7 @@
 package org.geektimes.projects.user.repository;
 
 import org.geektimes.function.ThrowableFunction;
+import org.geektimes.projects.user.context.ComponentContext;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.sql.DBConnectionManager;
 
@@ -33,8 +34,8 @@ public class DatabaseUserRepository implements UserRepository {
 
     private final DBConnectionManager dbConnectionManager;
 
-    public DatabaseUserRepository(DBConnectionManager dbConnectionManager) {
-        this.dbConnectionManager = dbConnectionManager;
+    public DatabaseUserRepository() {
+        this.dbConnectionManager = ComponentContext.getInstance().getComponent("bean/DBConnectionManager");
     }
 
     private Connection getConnection() {
@@ -43,9 +44,10 @@ public class DatabaseUserRepository implements UserRepository {
 
     @Override
     public boolean save(User user) {
-        String databaseURL = "jdbc:derby:/Users/liuxilai/IdeaProjects/db/user-platform;create=true";
+//        String databaseURL = "jdbc:derby:/Users/liuxilai/IdeaProjects/db/user-platform;create=true";
         try {
-            Connection connection = DriverManager.getConnection(databaseURL);
+//            Connection connection = DriverManager.getConnection(databaseURL);
+            Connection connection = getConnection();
             Statement statement = connection.createStatement();
             String sql = "INSERT INTO users(name,password,email,phoneNumber) VALUES";
             sql += " ('" + user.getName() + "','" + user.getPassword() + "'," + "'xxx@1.com','123')";
